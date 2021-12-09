@@ -1,0 +1,12 @@
+import cv2
+cap = cv2.VideoCapture(0)
+body = cv2.CascadeClassifier('body.xml')
+while True:
+    a,img = cap.read()
+    results = body.detectMultiScale(img, scaleFactor=2, minNeighbors=50)
+    for (x, y, w, h) in results:
+        cv2.rectangle(img, (x, y), (x+w, y+h), (255, 255, 0), thickness=3)
+
+    cv2.imshow('Sand', img)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
